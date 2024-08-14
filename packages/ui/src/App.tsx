@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import ProtectedRoute from "./auth/ProtectedRoute";
+import Dashboard from "./pages/dashboard/Dashboard";
+import Login from "./pages/login/Login";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const isAuthenticated = true;
+  const router = createBrowserRouter([
+    { path: "/", element: isAuthenticated ? <Navigate to="/dashboard" /> : <Login /> },
+    { element: <ProtectedRoute />, children: [{ path: "/dashboard", element: <Dashboard /> }] },
+
+    { path: "/register" },
+    { path: "*", element: <h1>Page not found</h1> },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
