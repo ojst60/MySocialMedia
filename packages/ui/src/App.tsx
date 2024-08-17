@@ -3,9 +3,12 @@ import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"
 import ProtectedRoute from "./auth/ProtectedRoute";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Login from "./pages/login/Login";
+import { useUiSelector } from "./redux/hooks";
+import { RootState } from "./redux/store";
 
 function App() {
-  const isAuthenticated = true;
+  const isAuthenticated = useUiSelector((state: RootState) => state.auth.loggedIn);
+
   const router = createBrowserRouter([
     { path: "/", element: isAuthenticated ? <Navigate to="/dashboard" /> : <Login /> },
     { element: <ProtectedRoute />, children: [{ path: "/dashboard", element: <Dashboard /> }] },

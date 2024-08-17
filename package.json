@@ -2,7 +2,7 @@
   "name": "socialMedia",
   "private": true,
   "scripts": {
-    "start": "turbo run start",
+    "dev:ui": "turbo run start",
     "build": "turbo build --filter=[ui]",
     "dev": "turbo dev",
     "lint": "turbo lint",
