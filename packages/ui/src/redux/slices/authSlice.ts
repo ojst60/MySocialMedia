@@ -8,7 +8,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  loggedIn: true,
+  loggedIn: false,
   username: "ojst01",
   displayName: "Julius Oyovwikigho",
 };

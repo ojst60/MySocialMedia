@@ -1,0 +1,41 @@
+.root-container {
+  background-image: url("../../../assets/images/background.jpg");
+  height: 100%;
+  background-size: contain;
+  background-repeat: round;
+  display: grid;
+  grid-template-columns: 40% 60%;
+
+  .logo-container {
+    display: flex;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(2px);
+    opacity: 0.9;
+
+    .logo {
+      height: 400px;
+      width: 400px;
+      display: flex;
+      margin: auto;
+    }
+  }
+
+  .main-container {
+    display: flex;
+    margin: auto;
+
+    .content {
+        display: flex;
+        flex-flow: column nowrap;
+        padding: 12px;
+        height: 300px;
+        width: 300px;
+        background: aliceblue;
+        justify-content: center;
+        align-items: center;
+        border-radius: 22px;
+    }
+  }
+}
