@@ -1,0 +1,25 @@
+.modal-backdrop {
+  position: fixed;
+  z-index: 1040;
+  inset: 0px;
+  background-color: rgb(0, 0, 0);
+  opacity: 0.5;
+}
+
+.modal-root {
+  position: fixed;
+  width: 500px;
+  z-index: 1040;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgb(229, 229, 229);
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 15px;
+  padding: 20px;
+  .container {
+    display: flex;
+    align-items: center;
+    flex-flow: column nowrap;
+  }
+}

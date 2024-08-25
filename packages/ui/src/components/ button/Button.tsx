@@ -1,3 +1,5 @@
+import { Button as BaseButton } from "@restart/ui";
+
 type ButtonI = {
   label: string;
   type: "primary" | "secondary";
@@ -5,8 +7,7 @@ type ButtonI = {
 };
 
 function Button({ label, type, onClick }: ButtonI) {
-  return <button onClick={onClick}>{label}</button>;
+  return <BaseButton onClick={onClick}>{label}</BaseButton>;
 }
 
-
-export default Button 
+export default Button;

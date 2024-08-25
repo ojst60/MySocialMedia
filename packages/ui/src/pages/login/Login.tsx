@@ -1,13 +1,18 @@
 import styles from "./styles/login.module.scss";
+import Modal from "../../components/modal/Modal";
+import { useState } from "react";
 
 function Login(): JSX.Element {
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
   return (
-    <div className={styles["root-container"]}>
-      <div className={styles["login-dialog"]}>
-        <h2>Login to your profile</h2>
-        <form></form>
-      </div>
-    </div>
+    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <Modal.header showCloseButton>
+        <h1>Header</h1>
+
+      </Modal.header>
+      <Modal.body></Modal.body>
+    </Modal>
   );
 }
 

@@ -6,16 +6,24 @@ import Login from "./pages/login/Login";
 import { useUiSelector } from "./redux/hooks";
 import { RootState } from "./redux/store";
 
-
 function App() {
   const isAuthenticated = useUiSelector((state: RootState) => state.auth.loggedIn);
 
   const router = createBrowserRouter([
-    { path: "/", element: isAuthenticated ? <Navigate to="/dashboard" /> : <Landing /> },
-    { path: "/login", element: isAuthenticated ? <Navigate to="/dashboard" /> : <Login /> },
+    {
+      path: "/",
+      element: isAuthenticated ? <Navigate to="/dashboard" /> : <Landing />,
+      children: [
+        { path: "/login", element: <Login /> },
+        {
+          path: "/register",
+          element: <h1>Register your account</h1>,
+        },
+      ],
+    },
+
     { element: <ProtectedRoute />, children: [{ path: "/dashboard", element: <Dashboard /> }] },
 
-    { path: "/register" },
     { path: "*", element: <h1>Page not found</h1> },
   ]);
 
