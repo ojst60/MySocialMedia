@@ -1,6 +1,7 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
+
   "tasks": {
     "lint": {
       "dependsOn": ["^lint"]
@@ -10,6 +11,9 @@
       "persistent": true
     },
     "start": {
+      "cache": false
+    },
+    "server:start": {
       "cache": false
     }
   }

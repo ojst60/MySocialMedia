@@ -5,19 +5,23 @@
     "dev:ui": "turbo run start",
     "build": "turbo build --filter=[ui]",
     "dev": "turbo dev",
+    "server:start": "turbo server:start",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
     "prettier": "^3.2.5",
-    "turbo": "^2.0.12",
-    "typescript": "^5.4.5"
+    "turbo": "^2.0.12"
   },
   "engines": {
     "node": ">=18"
   },
   "packageManager": "npm@10.7.0",
   "workspaces": [
-    "packages/*"
-  ]
+    "apps/ui",
+    "apps/server"
+  ],
+  "dependencies": {
+    "j": "^1.0.0"
+  }
 }
