@@ -1,25 +1,12 @@
 import { useState } from "react";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Box,
-  FormControl,
-  FormLabel,
-  TextField,
-} from "@mui/material";
+import { Box, FormControl, FormLabel, TextField } from "@mui/material";
 import { AuthDialog } from "../../components/authDialog";
 import styles from "./styles/signup.module.scss";
 
 function Signup(): JSX.Element {
   const [usernameError, setUsernameError] = useState(false);
-  function onCloseHandler() {
-    {
-      /** Add logic naviate home */
-    }
-  }
   return (
-    <AuthDialog title="Sign up" onClose={onCloseHandler}>
+    <AuthDialog title="Sign up">
       <Box component="form" className={styles.box} noValidate>
         <FormControl>
           <FormLabel htmlFor="username">Username</FormLabel>

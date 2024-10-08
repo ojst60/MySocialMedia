@@ -1,4 +1,5 @@
 import { useState, ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -11,16 +12,16 @@ import CloseIcon from "@mui/icons-material/Close";
 type Props = {
   title: string;
   children: ReactNode;
-  onClose: () => void;
 };
 
-function AuthDialog({ title, children, onClose }: Props): JSX.Element {
+function AuthDialog({ title, children }: Props): JSX.Element {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(true);
 
   // Handles the close button
   function onCloseHandler() {
     setIsModalOpen(false);
-    onClose();
+    navigate("/");
   }
 
   return (

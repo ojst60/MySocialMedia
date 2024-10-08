@@ -13,17 +13,14 @@ import {
   Checkbox,
   Link,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function Login(): JSX.Element {
+  const navigate = useNavigate();
   const [usernameError, setUsernameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   return (
-    <AuthDialog
-      title="Login"
-      onClose={() => {
-        /** to do */
-      }}
-    >
+    <AuthDialog title="Login">
       <Box component="form" className={styles.box} noValidate>
         {/** username */}
         <FormControl>
@@ -70,13 +67,12 @@ function Login(): JSX.Element {
         <Typography sx={{ textAlign: "center" }}>
           Don&apos;t have an account?{" "}
           <span>
-            <Link
-              href="/material-ui/getting-started/templates/sign-in/"
-              variant="body2"
+            <Button
+              onClick={() => navigate("/register")}
               sx={{ alignSelf: "center" }}
             >
               Sign up
-            </Link>
+            </Button>
           </span>
         </Typography>
         <Divider />

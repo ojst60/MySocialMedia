@@ -27,7 +27,7 @@ function Landing(): JSX.Element {
           <Button onClick={onSignUpHandler}>Create an account</Button>
 
           <p>Already have an account ?</p>
-          <Link onClick={onLoginHandler}>Login</Link>
+          <Button onClick={onLoginHandler}>Login</Button>
         </Box>
       </div>
       <Outlet />
