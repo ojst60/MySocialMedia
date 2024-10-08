@@ -1,39 +1,21 @@
-import express, { Request, Response } from "express";
-import dotenv from 'dotenv';
-import path from 'path'
+import express from "express";
+import "dotenv/config";
+import { auth } from "./routes";
+import helmet from "helmet";
+import { connectDB } from "./db";
 
-// Load env vars
-const loadEnvVar = dotenv.config({ path: path.resolve(__dirname,'../config.env') });
+// Connect to database
+connectDB();
 
-if (loadEnvVar.error) {
-  console.error("Failed to load environment variables from config.env", loadEnvVar.error);
-  process.exit(1);
-}
-
-
-const objRes = [
-  { id: 1, name: "julius" },
-  { id: 2, name: "Abel" },
-];
-
-console.log(process.env);
-
-const app = express();
-const port = 5000;
+export const app = express();
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
+app.use(helmet());
 
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).json(objRes);
-});
+// Routes
+app.use("/auth", auth);
 
-// Parameterized route
-app.get("/api/:number", (req: Request, res: Response) => {
-  console.log(req.params);
-  res.send("This is my second route");
-});
-
-app.listen(port, () => {
-  console.log(`app listening on port ${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`app listening on port ${process.env.PORT}`);
 });

@@ -1,18 +1,103 @@
-import styles from "./styles/login.module.scss";
-import Modal from "../../components/modal/Modal";
 import { useState } from "react";
+import { AuthDialog } from "../../components/authDialog";
+import styles from "./styles/login.module.scss";
+import {
+  Typography,
+  Button,
+  Divider,
+  FormControl,
+  Box,
+  TextField,
+  FormLabel,
+  FormControlLabel,
+  Checkbox,
+  Link,
+} from "@mui/material";
 
 function Login(): JSX.Element {
-  const [isModalOpen, setIsModalOpen] = useState(true);
-
+  const [usernameError, setUsernameError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
   return (
-    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-      <Modal.header showCloseButton>
-        <h1>Header</h1>
+    <AuthDialog
+      title="Login"
+      onClose={() => {
+        /** to do */
+      }}
+    >
+      <Box component="form" className={styles.box} noValidate>
+        {/** username */}
+        <FormControl>
+          <FormLabel htmlFor="username">Username </FormLabel>
+          <TextField
+            id="username"
+            autoFocus
+            type="text"
+            name="username"
+            color={usernameError ? "error" : "primary"}
+            required
+            placeholder="Please enter your username"
+          />
+        </FormControl>
+        {/** password */}
 
-      </Modal.header>
-      <Modal.body></Modal.body>
-    </Modal>
+        <FormControl>
+          <FormLabel htmlFor="password">Password</FormLabel>
+          <TextField
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Please enter your password"
+            color={passwordError ? "error" : "primary"}
+            autoFocus
+            required
+          />
+        </FormControl>
+      </Box>
+      <Box className={styles["button-box"]}>
+        <FormControlLabel
+          control={<Checkbox value="remember" color="primary" />}
+          label="Remember me"
+        />
+        {/* <ForgotPassword open={open} handleClose={handleClose} /> */}
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          // onClick={validateInputs}
+        >
+          Sign in
+        </Button>
+        <Typography sx={{ textAlign: "center" }}>
+          Don&apos;t have an account?{" "}
+          <span>
+            <Link
+              href="/material-ui/getting-started/templates/sign-in/"
+              variant="body2"
+              sx={{ alignSelf: "center" }}
+            >
+              Sign up
+            </Link>
+          </span>
+        </Typography>
+        <Divider />
+        <Button
+          fullWidth
+          variant="outlined"
+          onClick={() => alert("Sign in with Google")}
+          // startIcon={<GoogleIcon />}
+        >
+          Sign in with Google
+        </Button>
+        <Button
+          fullWidth
+          variant="outlined"
+          onClick={() => alert("Sign in with Facebook")}
+          // startIcon={<FacebookIcon />}
+        >
+          Sign in with Facebook
+        </Button>
+      </Box>
+    </AuthDialog>
   );
 }
 

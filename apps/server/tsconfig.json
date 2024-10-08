@@ -1,17 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "CommonJS",
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "outDir": "./dist",
-    "declaration": true,
-    "emitDeclarationOnly": true
-    // Ensure that Babel can safely transpile files in the TypeScript project
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["./src"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "./src"
+  ]
 }

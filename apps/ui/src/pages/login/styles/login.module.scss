@@ -1,17 +1,13 @@
-.root-container {
-  background-image: url("../../../assets/images/background.jpg");
-  height: 100%;
-  background-size: contain;
-  background-repeat: round;
-  display: grid;
-  place-items: center;
+.box {
+  display: flex;
+  gap: 16px;
+  flex-flow: column nowrap;
+  padding: 32px;
+}
 
-  .login-dialog {
-    min-height: 300px;
-    background-color: skyblue;
-    min-width: 500px;
-    opacity: 0.5;
-    display: flex;
-    justify-content: center;
-  }
+.button-box {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 32px;
+  gap: 16px;
 }

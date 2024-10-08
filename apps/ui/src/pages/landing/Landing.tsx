@@ -1,5 +1,6 @@
 import Logo from "../../assets/images/logo.jpeg";
 import styles from "./styles/landing.module.scss";
+import { Box, Button, Link, Typography } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
 
 function Landing(): JSX.Element {
@@ -19,15 +20,15 @@ function Landing(): JSX.Element {
         <img src={Logo} className={styles.logo} />
       </div>
       <div className={styles["main-container"]}>
-        <div className={styles.content}>
-          <h2>Join the gist</h2>
-          <h4>Join today</h4>
+        <Box component="div" className={styles.content}>
+          <Typography variant="h2">Join the gist</Typography>
+          <Typography variant="h4">Join today</Typography>
 
-          <button onClick={onSignUpHandler}>Create an account</button>
+          <Button onClick={onSignUpHandler}>Create an account</Button>
 
           <p>Already have an account ?</p>
-          <button onClick={onLoginHandler}>Login</button>
-        </div>
+          <Link onClick={onLoginHandler}>Login</Link>
+        </Box>
       </div>
       <Outlet />
     </div>

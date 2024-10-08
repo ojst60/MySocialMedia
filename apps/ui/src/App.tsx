@@ -1,13 +1,20 @@
-import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Landing from "./pages/landing/Landing";
 import Login from "./pages/login/Login";
+import Signup from "./pages/signup/Signup";
 import { useUiSelector } from "./redux/hooks";
 import { RootState } from "./redux/store";
 
 function App() {
-  const isAuthenticated = useUiSelector((state: RootState) => state.auth.loggedIn);
+  const isAuthenticated = useUiSelector(
+    (state: RootState) => state.auth.loggedIn
+  );
 
   const router = createBrowserRouter([
     {
@@ -17,12 +24,15 @@ function App() {
         { path: "/login", element: <Login /> },
         {
           path: "/register",
-          element: <h1>Register your account</h1>,
+          element: <Signup />,
         },
       ],
     },
 
-    { element: <ProtectedRoute />, children: [{ path: "/dashboard", element: <Dashboard /> }] },
+    {
+      element: <ProtectedRoute />,
+      children: [{ path: "/dashboard", element: <Dashboard /> }],
+    },
 
     { path: "*", element: <h1>Page not found</h1> },
   ]);
