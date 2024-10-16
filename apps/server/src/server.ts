@@ -1,21 +1,45 @@
 import express from "express";
-import "dotenv/config";
-import { auth } from "./routes";
+import auth from "./routes/auth";
 import helmet from "helmet";
+import morgan from "morgan";
 import { connectDB } from "./db";
+import "colors";
+import { env } from "./validation/env";
+import cookieParser from "cookie-parser";
 
 // Connect to database
-connectDB();
+(async function () {
+  await connectDB();
+})();
 
 export const app = express();
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
-app.use(helmet());
 
-// Routes
-app.use("/auth", auth);
+// Cookie parese middleware
+app.use(cookieParser())
 
-app.listen(process.env.PORT, () => {
-  console.log(`app listening on port ${process.env.PORT}`);
+// Log the request time, http version, method and URL
+
+if (env.NODE_ENV === "development") {
+  console.log("yet");
+  app.use(morgan(":date[web] :http-version :method :url".blue));
+}
+
+// app.use(helmet());
+
+// API Routes
+app.use("/api/v1/auth", auth);
+
+const port = env.PORT;
+
+const server = app.listen(port, () => {
+  console.log(`app listening on port ${port}`.green);
 });
+
+// process.on("uncaughtException", (err, promise) => {
+//   console.log(`Error : ${err.message}.red`);
+
+//   server.close(() => process.exit(1));
+// });

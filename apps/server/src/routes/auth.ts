@@ -1,18 +1,16 @@
 import { Router, Request, Response } from "express";
+import { validateRequestData } from "../middleware/validateData";
+import { login, register, logout } from "../controllers/auth";
+import { UserSchema } from "../models/User";
 
 const auth = Router();
 
-auth.post("/register", (req: Request, res: Response) => {
-    console.log(req)
-    res.send(req.body)
+auth.route("/register").post(validateRequestData(UserSchema), register);
 
-});
+auth.route("/login").post(login);
 
-auth.post("/login", (req: Request, res: Response,) => {});
+auth.route("/logout").post(logout);
 
-auth.post("/password-reset", (req: Request, res: Response) => {});
+auth.route("/me");
 
-auth.post("/token-refresh", (req: Request, res: Response) => {});
-
-
-export default auth
+export default auth;

@@ -14,7 +14,9 @@
       "cache": false
     },
     "server:start": {
-      "cache": false
+      "cache": false,
+      "persistent": true,
+      "interactive": true
     }
   }
 }
