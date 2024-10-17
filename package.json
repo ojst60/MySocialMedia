@@ -1,16 +1,13 @@
 {
-  "name": "socialMedia",
+  "name": "socialmedia",
   "private": true,
   "scripts": {
-    "dev:ui": "turbo run start",
-    "build": "turbo build --filter=[ui]",
-    "dev": "turbo dev",
-    "server:start": "turbo server:start",
-    "lint": "turbo lint",
+    "start": "turbo run dev",
+    "build": "turbo run build",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "prettier": "^3.2.5",
+    "prettier": "^3.3.3",
     "turbo": "^2.0.12"
   },
   "engines": {
@@ -18,11 +15,6 @@
   },
   "packageManager": "npm@10.7.0",
   "workspaces": [
-    "apps/ui",
-    "apps/server"
-  ],
-  "dependencies": {
-    "dotenv": "^16.4.5",
-    "j": "^1.0.0"
-  }
+    "apps/*"
+  ]
 }

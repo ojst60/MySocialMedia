@@ -3,20 +3,12 @@
   "ui": "tui",
 
   "tasks": {
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
-    "dev": {
+    "start": {
       "cache": false,
       "persistent": true
     },
-    "start": {
-      "cache": false
-    },
-    "server:start": {
-      "cache": false,
-      "persistent": true,
-      "interactive": true
+    "build": {
+      "outputs": ["dist/**"]
     }
   }
 }
