@@ -37,7 +37,7 @@ const userSchema = new Schema<User>({
     unique: true,
     required: [true, "Please enter a username"],
     trim: true,
-    minlength: 4,
+    minlength: 3,
   },
   email: {
     type: String,

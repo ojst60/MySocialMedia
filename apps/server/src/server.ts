@@ -1,11 +1,12 @@
 import express from "express";
 import auth from "./routes/auth";
-import helmet from "helmet";
+import { errorHandler } from "./middleware/error";
 import morgan from "morgan";
 import { connectDB } from "./db";
 import "colors";
 import { env } from "./validation/env";
 import cookieParser from "cookie-parser";
+import cors from 'cors'
 
 // Connect to database
 (async function () {
@@ -13,6 +14,13 @@ import cookieParser from "cookie-parser";
 })();
 
 export const app = express();
+
+// Allow requests from http://localhost:3000
+app.use(cors({
+  origin: 'http://localhost:3000',  // frontend URL
+  credentials: true,
+  allowedHeaders: ['Content-Type'] // headers
+}));
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
@@ -23,7 +31,6 @@ app.use(cookieParser())
 // Log the request time, http version, method and URL
 
 if (env.NODE_ENV === "development") {
-  console.log("yet");
   app.use(morgan(":date[web] :http-version :method :url".blue));
 }
 
@@ -31,6 +38,8 @@ if (env.NODE_ENV === "development") {
 
 // API Routes
 app.use("/api/v1/auth", auth);
+
+app.use(errorHandler)
 
 const port = env.PORT;
 
