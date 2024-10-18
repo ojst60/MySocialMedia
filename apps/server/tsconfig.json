@@ -8,8 +8,7 @@
     "esModuleInterop": true,                      // Enables emit interoperability between CommonJS and ES Modules
     "skipLibCheck": true,                         // Skip type checking of declaration files
     "forceConsistentCasingInFileNames": true,    // Ensure consistent file naming
-    "sourceMap": true,                            // Generate source maps
-    "declaration": true,                          // Generate .d.ts files for types
+    "sourceMap": true,                            // Generate source maps                      // Generate .d.ts files for types
     "moduleResolution": "node",                   // Use Node.js resolution strategy
     "noImplicitAny": true,                        // Raise error on expressions and declarations with an implied 'any' type
     "isolatedModules": true                        // Ensure that each file can be safely transpiled independently
