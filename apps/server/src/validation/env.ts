@@ -3,7 +3,7 @@ import "dotenv/config";
 
 const envSchema = z.object({
   NODE_ENV: z.enum(["production", "development"]),
-  PORT: z.coerce.number().min(2000).max(7000),
+  PORT: z.coerce.number(),
   DB_USERNAME: z.string(),
   DB_PASSWORD: z.string(),
   MONGO_URI: z.string(),
