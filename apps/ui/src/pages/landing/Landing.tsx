@@ -1,6 +1,6 @@
 import Logo from "../../assets/images/logo.jpeg";
 import styles from "./styles/landing.module.scss";
-import { Box, Button, Link, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { Outlet, useNavigate } from "react-router-dom";
 
 function Landing(): JSX.Element {
@@ -17,7 +17,7 @@ function Landing(): JSX.Element {
   return (
     <div className={styles["root-container"]}>
       <div className={styles["logo-container"]}>
-        <img src={Logo} className={styles.logo} />
+        <img src={Logo} className={styles.logo} alt="background"/>
       </div>
       <div className={styles["main-container"]}>
         <Box component="div" className={styles.content}>
