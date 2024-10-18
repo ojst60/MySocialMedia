@@ -1,0 +1,30 @@
+name: Frontend CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.16.0'
+      - name: Install Dependencies for UI
+        run: |
+          cd apps/ui
+          npm install
+      - name: create build
+        run: npm run build
+      # - name: Run Frontend Tests
+      #   run: |
+      #     cd apps/ui
+      #     npm run test
