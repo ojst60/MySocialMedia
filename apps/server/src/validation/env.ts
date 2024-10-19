@@ -8,7 +8,8 @@ const envSchema = z.object({
   DB_PASSWORD: z.string(),
   MONGO_URI: z.string(),
   JWT_PRIVATE_KEY: z.string(),
-  JWT_EXPIRY:z.string()
+  JWT_EXPIRY:z.string(),
+  URL_FRONTEND: z.string()
 });
 
 
@@ -19,7 +20,8 @@ const variablesObj = {
   DB_PASSWORD: process.env.DB_PASSWORD,
   MONGO_URI: process.env.MONGO_URI,
   JWT_PRIVATE_KEY: process.env.JWT_PRIVATE_KEY,
-  JWT_EXPIRY: process.env.JWT_EXPIRY
+  JWT_EXPIRY: process.env.JWT_EXPIRY,
+  URL_FRONTEND: process.env.URL_FRONTEND
 };
 
 const res = envSchema.safeParse(variablesObj);

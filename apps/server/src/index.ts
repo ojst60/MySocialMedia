@@ -6,27 +6,30 @@ import { connectDB } from "./db";
 import "colors";
 import { env } from "./validation/env";
 import cookieParser from "cookie-parser";
-import cors from 'cors'
+import cors from "cors";
 
 // Connect to database
 (async function () {
   await connectDB();
 })();
 
+const originURL = env.NODE_ENV === "production" ? "" : "http://localhost:3000";
+
 export const app = express();
 
-// Allow requests from http://localhost:3000
-app.use(cors({
-  origin: 'http://localhost:3000',  // frontend URL
-  credentials: true,
-  allowedHeaders: ['Content-Type'] // headers
-}));
+app.use(
+  cors({
+    origin: originURL, // frontend URL
+    credentials: true,
+    allowedHeaders: ["Content-Type"], // headers
+  })
+);
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
 // Cookie parese middleware
-app.use(cookieParser())
+app.use(cookieParser());
 
 // Log the request time, http version, method and URL
 
@@ -39,7 +42,7 @@ if (env.NODE_ENV === "development") {
 // API Routes
 app.use("/api/v1/auth", auth);
 
-app.use(errorHandler)
+app.use(errorHandler);
 
 const port = env.PORT;
 
