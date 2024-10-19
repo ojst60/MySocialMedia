@@ -8,8 +8,12 @@ interface APIConfig {
   body?: Record<string, any>; // Request body for POST, PUT, etc.
 }
 
+ const defaultBaseURL = process.env.NODE_ENV === 'production' ? process.env.BACKEND_URL : "http://localhost:5000/api/v1/"
+
 export async function fetchapi(config: APIConfig) {
-  const baseURL = config.baseURL ?? "http://localhost:5000/api/v1/";
+
+ 
+  const baseURL = config.baseURL ?? defaultBaseURL;
 
   try {
     const response = await axios({
@@ -20,7 +24,7 @@ export async function fetchapi(config: APIConfig) {
     });
 
     const data = response.data;
-    console.log(data)
+
 
     return data;
   } catch (error) {
