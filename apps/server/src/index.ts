@@ -13,7 +13,7 @@ import cors from "cors";
   await connectDB();
 })();
 
-const originURL = env.NODE_ENV === "production" ? "" : "http://localhost:3000";
+const originURL = env.NODE_ENV === "production" ? env.URL_FRONTEND : "http://localhost:3000";
 
 export const app = express();
 
