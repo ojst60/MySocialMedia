@@ -5,8 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "npx tsc",
-    "start:prod": "node dist/index.js",
-    "build:prod": "npm install turbo && npm install && npm run build && npm run start:prod",
+    "start:prod": "node ./dist/index.js",
+    "build:prod": "yarn build",
     "start": "nodemon --watch src --ext ts,js --exec \"ts-node src/index.ts\""
   },
   "author": "",
