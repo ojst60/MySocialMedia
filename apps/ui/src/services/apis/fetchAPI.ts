@@ -8,7 +8,7 @@ interface APIConfig {
   body?: Record<string, any>; // Request body for POST, PUT, etc.
 }
 
- const defaultBaseURL = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BACKEND_URL : "http://localhost:5000/api/v1/"
+ const defaultBaseURL = process.env.NODE_ENV === 'production' ? process.env.BACKEND_URL : "http://localhost:5000/api/v1/"
 
 export async function fetchapi(config: APIConfig) {
 
