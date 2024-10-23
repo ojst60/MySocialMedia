@@ -31,7 +31,9 @@ function App() {
 
     {
       element: <ProtectedRoute />,
-      children: [{ path: "/dashboard", element: <Dashboard /> }],
+      children: [
+        { path: "/dashboard", element: <Dashboard />, id: "dashboard" },
+      ],
     },
 
     { path: "*", element: <h1>Page not found</h1> },

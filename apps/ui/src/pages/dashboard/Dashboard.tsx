@@ -1,26 +1,15 @@
-import { Button } from "@mui/material";
+import { Container } from "@mui/material";
+import { CreatePost } from "../../components/Post";
 import { useUiSelector } from "../../redux/hooks";
-import { fetchapi } from "../../services/apis/fetchAPI";
-import { useUiDispatch } from "../../redux/hooks";
-import { logout } from "../../redux/slices/authSlice";
+import styles from "./styles/dashboard.module.scss";
 
 function Dashboard(): JSX.Element {
   const username = useUiSelector((state) => state.auth.username);
-  const dispatch = useUiDispatch();
-
-  async function logoutHandler() {
-    const res = await fetchapi({ method: "POST", url: "auth/logout" });
-
-    if (!res.error) {
-      dispatch(logout());
-    }
-  }
 
   return (
-    <div>
-      <div>Welcome to your dashboard, {username}</div>
-      <Button onClick={logoutHandler}>Log out</Button>
-    </div>
+    <Container maxWidth="md" className={styles.root}>
+      <CreatePost/>
+    </Container>
   );
 }
 
