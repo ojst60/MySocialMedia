@@ -1,3 +1,4 @@
 import CreatePost from "./CreatePost";
+import PostCard from "./PostCard";
 
-export { CreatePost };
+export { CreatePost, PostCard };

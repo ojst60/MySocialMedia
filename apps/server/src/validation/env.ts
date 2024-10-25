@@ -9,7 +9,11 @@ const envSchema = z.object({
   MONGO_URI: z.string(),
   JWT_PRIVATE_KEY: z.string(),
   JWT_EXPIRY:z.string(),
-  URL_FRONTEND: z.string()
+  URL_FRONTEND: z.string(),
+  EMAIL_CLIENT_ID: z.string(),
+  EMAIL_CLIENT_SECRET: z.string(),
+  BACKEND_URI: z.string(),
+  EMAIL_REFRESH_TOKEN: z.string()
 });
 
 
@@ -21,7 +25,11 @@ const variablesObj = {
   MONGO_URI: process.env.MONGO_URI,
   JWT_PRIVATE_KEY: process.env.JWT_PRIVATE_KEY,
   JWT_EXPIRY: process.env.JWT_EXPIRY,
-  URL_FRONTEND: process.env.URL_FRONTEND
+  URL_FRONTEND: process.env.URL_FRONTEND,
+  EMAIL_CLIENT_ID:process.env.EMAIL_CLIENT_ID,
+  EMAIL_CLIENT_SECRET: process.env.EMAIL_CLIENT_SECRET,
+  BACKEND_URI: process.env.BACKEND_URI,
+  EMAIL_REFRESH_TOKEN: process.env.EMAIL_REFRESH_TOKEN
 };
 
 const res = envSchema.safeParse(variablesObj);

@@ -20,10 +20,10 @@ import {
   MessageOutlined,
 } from "@mui/icons-material";
 import { ReactNode } from "react";
-import styles from "./styles/layoutRoute.module.scss";
 import { useUiDispatch } from "../redux/hooks";
 import { logout } from "../redux/slices/authSlice";
 import { fetchapi } from "../services/apis/fetchAPI";
+import styles from "./styles/layout.module.scss";
 
 type MenuItems = {
   label: string;
@@ -65,11 +65,14 @@ function LayoutRoute(): JSX.Element {
               display: { xs: "none", md: "block" }, // Hidden on small screens
               "& .MuiDrawer-paper": {
                 width: drawerWidth,
-                boxSizing: "border-box",
-                border: 'none',
-                
+                background: "rgb(213, 226, 225)",
+                color: "rgb(54, 69, 79)",
               },
-              border: '0px'
+
+              "& .Mui-selected": {
+                fontFamily: 800,
+                color: "red",
+              },
             }}
           >
             <Toolbar />
@@ -77,16 +80,23 @@ function LayoutRoute(): JSX.Element {
             <Stack sx={{ flexGrow: 1, p: 1, justifyContent: "space-between" }}>
               <List dense>
                 {menuItems.map(({ icon, label, to }, index) => (
-                  <NavLink to={to} key={index} className={styles["nav-link"]}>
+                  <NavLink
+                    to={to}
+                    key={index}
+                    className={({ isActive }) =>
+                      `${styles.link} ${isActive ? styles.isActive : ""}`
+                    }
+                  >
                     {({ isActive }) => (
-                      <ListItem
-                        disablePadding
-                        className={
-                          isActive ? styles["active-menu"] : styles.menu
-                        }
-                      >
+                      <ListItem disablePadding>
                         <ListItemButton>
-                          <ListItemIcon>{icon}</ListItemIcon>
+                          <ListItemIcon
+                            sx={{
+                              color: `${isActive ? "rgb(255, 255, 255)" : "rgb(54, 69, 79)"}`,
+                            }}
+                          >
+                            {icon}
+                          </ListItemIcon>
                           <ListItemText primary={label} />
                         </ListItemButton>
                       </ListItem>
@@ -95,7 +105,20 @@ function LayoutRoute(): JSX.Element {
                 ))}
               </List>
 
-              <Button onClick={logoutHandler}>Log out</Button>
+              <Button
+                sx={{
+                  background: "rgb(0, 123, 137)",
+                  color: "rgb(255, 255, 255)",
+                  fontWeight: "bold",
+                  padding: "10px 20px",
+                  border: "none",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                }}
+                onClick={logoutHandler}
+              >
+                Log out
+              </Button>
             </Stack>
           </Drawer>
         </Box>

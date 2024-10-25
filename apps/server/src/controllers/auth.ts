@@ -6,6 +6,7 @@ import { env } from "../validation/env";
 import { asyncHandler } from "../middleware/async";
 import { ErrorResponse } from "../utils/errorResponse";
 
+
 // @route POST /auth/login
 // @desc authenticate a  user
 // public
@@ -57,7 +58,6 @@ export const register = asyncHandler(async function (
   res: Response
 ): Promise<void> {
   await user.create(req.body);
-
   res.status(200).json({
     msg: "User created successfully",
   });
