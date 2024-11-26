@@ -1,43 +1,50 @@
-import axios, { AxiosError } from "axios"; // Import Axios and AxiosError
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import { store } from "../../redux/store";
+import { logout } from "../../redux/slices/authSlice";
 
 interface APIConfig {
   url: string;
-  method: "GET" | "POST" | "DELETE" | "PATCH" | "PUT";
-  baseURL?: string; // Optional base URL
+  method?: "GET" | "POST" | "DELETE" | "PATCH" | "PUT"; // Optional, defaults to GET
+  baseURL?: string;
   params?: Record<string, string>;
-  body?: Record<string, any>; // Request body for POST, PUT, etc.
+  body?: Record<string, any>;
 }
 
- const defaultBaseURL = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_BACKEND_URL : "http://localhost:5000/api/v1/"
+// Set the base URL based on the environment
+const defaultBaseURL =
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_BACKEND_URL
+    : "http://localhost:5000/api/v1/";
 
-export async function fetchapi(config: APIConfig) {
-
- 
+export async function fetchApi(config: APIConfig) {
   const baseURL = config.baseURL ?? defaultBaseURL;
+  const method = config.method ?? "GET";
 
   try {
-    const response = await axios({
+    const axiosConfig: AxiosRequestConfig = {
       ...config,
+      method,
       baseURL,
-      data: config.body, // Use data property for request body
+      data: config.body,
       withCredentials: true,
-    });
+    };
 
-    const data = response.data;
+    const response = await axios(axiosConfig);
 
-
-    return data;
+    return response.data;
   } catch (error) {
     if (error instanceof AxiosError) {
-      console.error("Error fetching API:", error.response?.data.message);
-
+      if (error.response?.status === 401) {
+        // Trigger logout on a 401 Unauthorized response . The backend should also clear clear the cookie
+        store.dispatch(logout());
+      }
+      // Return a standard error message
       return {
         data: null,
-        error: error.response?.data.message || "An unknown error occurred.",
+        error: error.response?.data?.message || "An API error occurred.",
       };
     }
 
-    // If the error is not an AxiosError, handle it generically
     console.error("An unexpected error occurred:", error);
     return {
       data: null,

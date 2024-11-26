@@ -7,17 +7,20 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import "./app.scss";
+import { NotificationsProvider } from "@toolpad/core";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
+    <NotificationsProvider>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <App />
       </PersistGate>
     </Provider>
+    </NotificationsProvider>
   </React.StrictMode>
 );
 

@@ -5,103 +5,90 @@ import {
   IconButton,
   Tooltip,
   TextareaAutosize,
+  CircularProgress,
 } from "@mui/material";
 import { PhotoAlbum, PhotoCamera } from "@mui/icons-material";
 
-function CreatePost(): JSX.Element {
+type ICreatePost = {
+  text: string;
+  onTextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onPostSubmit: () => Promise<void>;
+  isSubmitting: boolean;
+};
+
+function CreatePost({
+  text,
+  onTextChange,
+  onPostSubmit,
+  isSubmitting,
+}: ICreatePost): JSX.Element {
+  const isSubmitDisabled = text.trim().length === 0;
+
   return (
     <Box
-      component="div"
       sx={{
         display: "flex",
-        flexFlow: "row nowrap",
+        flexDirection: "column",
         width: "100%",
-        background: "rgb(213, 226, 225)",
         gap: "16px",
-        padding: "15px",
-        alignItems: "center",
-        borderRadius: "2px",
+        padding: "16px",
+        background: "white",
+        borderRadius: "12px",
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <Box
-        component="img"
-        alt="Profile pic"
-        src={require("./num1.jpg")}
-        sx={{
-          width: "50px",
-          height: "60px",
-          objectFit: "cover",
-          borderRadius: "50%",
+      <TextareaAutosize
+        placeholder="What's on your mind?"
+        minRows={4}
+        maxRows={8}
+        value={text}
+        onChange={onTextChange}
+        style={{
+          padding: "12px",
+          borderRadius: "8px",
+          border: "1px solid #ccc",
+          fontSize: "16px",
+          resize: "none",
         }}
       />
+      <Divider />
       <Box
-        component="div"
         sx={{
           display: "flex",
-          flexFlow: "column nowrap",
-          flexGrow: 1,
-          gap: "8px",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
         }}
       >
-        <TextareaAutosize
-          placeholder="What's on your mind ?"
-          minRows={6}
-          maxRows={6}
-          className=""
-          style={{
-            padding: "8px 16px",
-            borderRadius: "10px",
-            fontSize: "15px",
-          }}
-        />
-        <Divider />
-        <Box
+        <Box>
+          <Tooltip title="Add a photo">
+            <IconButton>
+              <PhotoAlbum sx={{ color: "#1976d2" }} />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Take a photo">
+            <IconButton>
+              <PhotoCamera sx={{ color: "#1976d2" }} />
+            </IconButton>
+          </Tooltip>
+        </Box>
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={isSubmitDisabled || isSubmitting}
+          onClick={onPostSubmit}
           sx={{
-            display: "flex",
-            flexFlow: "row nowrap",
-            alignItems: "center",
-            justifyContent: "space-between",
+            borderRadius: "8px",
+            padding: "8px 16px",
+            textTransform: "none",
           }}
         >
-          <Box>
-            <Tooltip title="Camera">
-              <IconButton>
-                <PhotoCamera
-                  sx={{
-                    color: "rgb(54, 69, 79)",
-                    cursor: "pointer",
-                  }}
-                />
-              </IconButton>
-            </Tooltip>
-
-            <Tooltip title="Photo">
-              <IconButton>
-                <PhotoAlbum
-                  sx={{
-                    color: "rgb(54, 69, 79)",
-                  }}
-                />
-              </IconButton>
-            </Tooltip>
-          </Box>
-          <Box component="div">
-            <Button
-              sx={{
-                background: "rgb(0, 123, 137)",
-                color: "rgb(255, 255, 255)",
-                fontWeight: "bold",
-                padding: "3px 15px",
-                border: "none",
-                borderRadius: "4px",
-                cursor: "pointer",
-              }}
-              disabled
-            >
-              Post
-            </Button>
-          </Box>
-        </Box>
+          {isSubmitting ? (
+            <CircularProgress size={24} color="inherit" />
+          ) : (
+            "Post"
+          )}
+        </Button>
       </Box>
     </Box>
   );

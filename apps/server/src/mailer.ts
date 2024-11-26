@@ -3,7 +3,6 @@ import { google } from "googleapis";
 import { env } from "./validation/env";
 import Mail from "nodemailer/lib/mailer";
 
-
 const CLIENT_ID = env.EMAIL_CLIENT_ID;
 const CLIENT_SECRET = env.EMAIL_CLIENT_SECRET;
 const REDIRECT_URI =
@@ -38,6 +37,6 @@ export async function sendMail(mailOptions: Mail.Options) {
 
     await transporter.sendMail(mailOptions);
   } catch (err) {
-    console.log(1);
+    console.log(err);
   }
 }

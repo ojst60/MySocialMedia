@@ -1,19 +1,23 @@
 {
   "compilerOptions": {
-    "target": "ES6",                              // Keep the target to ES6 or higher
-    "module": "commonjs",                         // CommonJS for Node.js compatibility
-    "outDir": "./dist",                           // Output directory for compiled files
-    "rootDir": "./src",                           // Specify the root directory of input files
-    "strict": true,                               // Enable strict type checking
-    "esModuleInterop": true,                      // Enables emit interoperability between CommonJS SSand ES Modules
-    "skipLibCheck": true,                         // Skip type checking of declaration files
-    "forceConsistentCasingInFileNames": true,    // Ensure consistent file naming
+      "outDir": "./dist",
+      "noImplicitReturns": false,
+      "allowJs": true,
+      "target": "ES5",
+      "noImplicitAny": true,
+      "strictNullChecks": true,
+      "strict": true,
+      "module": "CommonJS",
+      "types": [
+          "node",
+          "express"
+      ],
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      "rootDir": "./src",
+      "sourceMap": true,
   },
   "include": [
-    "./src"                                       // Include all files in the src directory
-  ],
-  "exclude": [
-    "node_modules",                      // Exclude node_modules directory
-    "dist"                                        // Exclude the output directory
+      "./src/**/*", ".env"
   ]
 }

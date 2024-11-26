@@ -2,7 +2,7 @@
   "name": "socialmedia",
   "private": true,
   "scripts": {
-    "start": "turbo run dev",
+    "start": "turbo run start",
     "build": "turbo run build",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

@@ -1,39 +1,18 @@
 .root-container {
   background-image: url("../../../assets/images/background.jpg");
-  background-size: contain;
-  background-repeat: round;
-  display: grid;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  .logo-container {
+  .button-container {
     display: flex;
-    margin: auto;
-    backdrop-filter: blur(2px);
-    opacity: 0.9;
+    flex-direction: column;
+    align-items: center;
 
-    .logo {
-      height: 400px;
-      width: 400px;
-      display: flex;
-      margin: auto;
-    }
-  }
-
-  .main-container {
-    display: flex;
-    margin: auto;
-
-   
-
-    .content {
-      display: flex;
-      flex-flow: column nowrap;
-      height: 300px;
-      width: 500px;
-      background: aliceblue;
-      opacity: 0.8;
-      justify-content: center;
-      align-items: center;
-      border-radius: 22px;
+    button {
+      margin-top: 10px;
     }
   }
 }

@@ -25,23 +25,54 @@ function AuthDialog({ title, children }: Props): JSX.Element {
   }
 
   return (
-    <Dialog open={isModalOpen} fullWidth maxWidth="sm">
-      <DialogTitle component={"h1"} variant="h4">
-        {title}
-      </DialogTitle>
-      <IconButton
-        onClick={onCloseHandler}
-        sx={(theme) => ({
-          position: "absolute",
-          right: 8,
-          top: 8,
-          color: theme.palette.grey[500],
-        })}
+    <Dialog
+      open={isModalOpen}
+      onClose={onCloseHandler}
+      fullWidth
+      maxWidth="sm"
+      sx={{
+        ".MuiPaper-root": {
+          borderRadius: "16px",
+          padding: "16px",
+          boxShadow: 8,
+        },
+      }}
+    >
+      <DialogTitle
+        component="h1"
+        variant="h5"
+        sx={{
+          fontWeight: 600,
+          textAlign: "center",
+          marginBottom: 1,
+        }}
       >
-        <CloseIcon />
-      </IconButton>
-      <Divider />
-      <DialogContent> {children}</DialogContent>
+        {title}
+        <IconButton
+          onClick={onCloseHandler}
+          sx={{
+            position: "absolute",
+            right: 16,
+            top: 16,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+      </DialogTitle>
+      <Divider sx={{ marginBottom: 2 }} />
+      <DialogContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 2,
+          padding: 3,
+        }}
+      >
+        {children}
+      </DialogContent>
     </Dialog>
   );
 }

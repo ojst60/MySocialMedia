@@ -25,6 +25,7 @@ export const UserSchema = z.object({
     ),
   role: z.enum(["admin", "user"]).default("user").optional(),
   active: z.boolean().default(false).optional(),
+  googleId: z.string().optional(),
 });
 
 // Create a TypeScript type from the schema
@@ -70,11 +71,12 @@ const userSchema = new Schema<User>({
     type: Boolean,
     default: false,
   },
+  googleId: String || undefined
 });
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
-    console.log('not modified')
+    console.log("not modified");
     return next();
   }
   const salt = bcrypt.genSaltSync(10);
@@ -83,4 +85,4 @@ userSchema.pre("save", async function (next) {
   next();
 });
 
-export const user = model<User>("user", userSchema);
+export const User = model<User>("user", userSchema);

@@ -1,5 +1,5 @@
 import {
-  Grid2 as Grid,
+  Grid2,
   Drawer,
   Toolbar,
   Divider,
@@ -22,7 +22,7 @@ import {
 import { ReactNode } from "react";
 import { useUiDispatch } from "../redux/hooks";
 import { logout } from "../redux/slices/authSlice";
-import { fetchapi } from "../services/apis/fetchAPI";
+import { fetchApi } from "../services/apis/fetchAPI";
 import styles from "./styles/layout.module.scss";
 
 type MenuItems = {
@@ -31,7 +31,7 @@ type MenuItems = {
   to: string;
 };
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 function LayoutRoute(): JSX.Element {
   const dispatch = useUiDispatch();
@@ -44,7 +44,7 @@ function LayoutRoute(): JSX.Element {
   ];
 
   async function logoutHandler() {
-    const res = await fetchapi({ method: "POST", url: "auth/logout" });
+    const res = await fetchApi({ method: "POST", url: "auth/logout" });
 
     if (!res.error) {
       dispatch(logout());
@@ -52,32 +52,42 @@ function LayoutRoute(): JSX.Element {
   }
 
   return (
-    <Grid container spacing={1}>
+    <Grid2 container spacing={0}>
       {/* Sidebar */}
-      <Grid size={{ xs: 12, md: 3, lg: 2 }}>
+      <Grid2
+        spacing={{ xs: 12, md: 3, lg: 2 }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
+          backgroundColor: "rgb(33, 41, 54)",
+          color: "rgb(255, 255, 255)",
+        }}
+      >
         <Box component="nav">
           <Drawer
             anchor="left"
             variant="permanent"
             elevation={0}
-            ModalProps={{ keepMounted: true }}
             sx={{
               display: { xs: "none", md: "block" }, // Hidden on small screens
               "& .MuiDrawer-paper": {
                 width: drawerWidth,
-                background: "rgb(213, 226, 225)",
-                color: "rgb(54, 69, 79)",
-              },
-
-              "& .Mui-selected": {
-                fontFamily: 800,
-                color: "red",
+                background: "linear-gradient(180deg, #222831, #393e46)",
+                color: "rgb(255, 255, 255)",
               },
             }}
           >
             <Toolbar />
-            <Divider />
-            <Stack sx={{ flexGrow: 1, p: 1, justifyContent: "space-between" }}>
+            <Divider sx={{ backgroundColor: "rgb(67, 81, 96)" }} />
+            <Stack
+              sx={{
+                flexGrow: 1,
+                p: 1,
+                justifyContent: "space-between",
+                height: "100%",
+              }}
+            >
               <List dense>
                 {menuItems.map(({ icon, label, to }, index) => (
                   <NavLink
@@ -89,15 +99,33 @@ function LayoutRoute(): JSX.Element {
                   >
                     {({ isActive }) => (
                       <ListItem disablePadding>
-                        <ListItemButton>
+                        <ListItemButton
+                          sx={{
+                            borderRadius: "8px",
+                            marginBottom: "10px",
+                            "&:hover": {
+                              backgroundColor: "rgb(50, 70, 90)",
+                            },
+                          }}
+                        >
                           <ListItemIcon
                             sx={{
-                              color: `${isActive ? "rgb(255, 255, 255)" : "rgb(54, 69, 79)"}`,
+                              color: isActive
+                                ? "#FFD369"
+                                : "rgb(173, 185, 202)",
                             }}
                           >
                             {icon}
                           </ListItemIcon>
-                          <ListItemText primary={label} />
+                          <ListItemText
+                            primary={label}
+                            primaryTypographyProps={{
+                              color: isActive
+                                ? "#FFD369"
+                                : "rgb(173, 185, 202)",
+                              fontWeight: isActive ? "bold" : "normal",
+                            }}
+                          />
                         </ListItemButton>
                       </ListItem>
                     )}
@@ -107,13 +135,16 @@ function LayoutRoute(): JSX.Element {
 
               <Button
                 sx={{
-                  background: "rgb(0, 123, 137)",
-                  color: "rgb(255, 255, 255)",
+                  background: "linear-gradient(45deg, #FF416C, #FF4B2B)",
+                  color: "white",
                   fontWeight: "bold",
                   padding: "10px 20px",
-                  border: "none",
-                  borderRadius: "4px",
+                  borderRadius: "8px",
                   cursor: "pointer",
+                  textTransform: "none",
+                  "&:hover": {
+                    background: "linear-gradient(45deg, #FF4B2B, #FF416C)",
+                  },
                 }}
                 onClick={logoutHandler}
               >
@@ -122,13 +153,21 @@ function LayoutRoute(): JSX.Element {
             </Stack>
           </Drawer>
         </Box>
-      </Grid>
+      </Grid2>
 
       {/* Content area */}
-      <Grid size={{ xs: 12, md: 9, lg: 10 }}>
+      <Grid2
+        spacing={{ xs: 12, md: 12, lg: 10 }}
+        sx={{
+          background: "rgb(248, 249, 250)",
+          minHeight: "100vh",
+          padding: 3,
+          width: "100%"
+        }}
+      >
         <Outlet />
-      </Grid>
-    </Grid>
+      </Grid2>
+    </Grid2>
   );
 }
 

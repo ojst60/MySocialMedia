@@ -1,6 +1,25 @@
 .box {
-    display: flex;
-    flex-direction: column;
+  gap: 16px;
+
+  button {
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 8px;
+    transition:
+      background-color 0.3s ease,
+      transform 0.2s ease;
+
+    &:hover {
+      background-color: #004aad;
+      transform: translateY(-2px);
+    }
+  }
+
+  @media (max-width: 600px) {
     gap: 12px;
-   
+
+    button {
+      font-size: 0.9rem;
+    }
+  }
 }
