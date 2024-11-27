@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AuthDialog, FormInput } from "../../components";
+import { Google } from "@mui/icons-material";
 import {
   Typography,
   Button,
@@ -133,18 +134,27 @@ function Login(): JSX.Element {
 
         {/* Social Login Buttons */}
         <Button
-          fullWidth
-          variant="outlined"
-          onClick={handleLogin}
-          sx={{
-            textTransform: "none",
-            marginBottom: 1,
-            fontWeight: 500,
-            borderRadius: 2,
-          }}
-        >
-          Sign in with Google
-        </Button>
+        onClick={handleLogin}
+        variant="outlined"
+        startIcon={<Google />}
+        fullWidth
+        sx={{
+          textTransform: "none",
+          fontWeight: 600,
+          fontSize: "16px",
+          paddingY: 1.5, // Vertical padding
+          color: "#fff", // White text
+          background: "linear-gradient(90deg, #4285F4, #EA4335, #FBBC05, #34A853)", // Google's multi-color gradient
+          borderRadius: "8px", // Smooth rounded edges
+          boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+          "&:hover": {
+            background: "linear-gradient(90deg, #34A853, #FBBC05, #EA4335, #4285F4)", // Reverse gradient on hover
+            boxShadow: "0px 5px 8px rgba(0, 0, 0, 0.15)", // Slightly stronger shadow on hover
+          },
+        }}
+      >
+        Sign in with Google
+      </Button>
      
       </Box>
     </AuthDialog>
